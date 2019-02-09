@@ -21,6 +21,7 @@ var player = {
 
 //get player's name
 player.name = prompt("Please enter your name:");
+document.title = "Darts: " + player.name 
 socket.emit('newPlayer', JSON.stringify(player));
 
 var refTable = document.getElementById("table");
