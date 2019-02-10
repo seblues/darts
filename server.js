@@ -24,6 +24,20 @@ io.on('connection', function (socket) {
 		
 		//add new player to the game
 		var newPlayer = JSON.parse(data);
+		
+		//find the index associated to the player name
+		var playerIndex = game.players.findIndex(
+			function(curEle){
+				return curEle.name === newPlayer.name;
+			}
+		);
+		
+		//if the player already exists then return
+		if( (playerIndex != -1) && (game.players.length != 0) ){
+			socket.emit("newPlayer", JSON.stringify(game));
+			return 
+		}
+		
 		game.players.push(newPlayer);
 		
 		console.log("new player: "+ newPlayer.name);
